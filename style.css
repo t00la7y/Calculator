@@ -1,0 +1,113 @@
+:root {
+  --bg: #bacdb0;
+  --bg-light: #f3e8ee;
+  --bg-dark: #729b79;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace, sans-serif;
+}
+
+header {
+  margin-bottom: 1rem;
+  text-align: center;
+  background-color: var(--bg);
+}
+
+header h1 {
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.show-digits {
+  margin-left: 20vw;
+  width: 60%;
+  padding: 1rem;
+  background-color: #fff;
+  color: var(--bg-dark);
+  font-size: 2rem;
+  text-align: right;
+  border-bottom: 2px solid #999;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.show-digits > div {
+  flex: 1;
+}
+
+.cal_op {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.operations {
+  display: flex;
+  gap: 1rem;
+}
+
+.operations button {
+  padding: 0.75rem 1rem;
+  font-size: 1.25rem;
+  background-color: #444;
+  color: var(--bg-light);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.operations button:hover {
+  background-color: #666;
+}
+
+.cal_num_pad {
+  display: flex;
+  justify-content: center;
+}
+
+.num_pad {
+  display: grid;
+  grid-template-columns: repeat(3, 5rem);
+  gap: 1rem;
+}
+
+.num_pad .btn {
+  padding: 1rem;
+  font-size: 1.25rem;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.num_pad .btn:hover {
+  background-color: #ddd;
+}
+
+footer {
+  margin: 1.7rem 0;
+  padding: 1.2rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  background-color: var(--bg);
+}
+
+footer h2 {
+  font-size: 1rem;
+  color: black;
+  margin: 1rem;
+  padding: 1rem;
+}
