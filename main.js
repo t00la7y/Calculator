@@ -1,76 +1,46 @@
-const display = document.querySelector('#digit-view > div');
+const opsDisplay = document.querySelector(".view-operations");
+const ansDisplay = document.querySelector(".view-answers");
 
-let current = '';
-let previous = '';
-let operator = null;
+// Gather all calculator buttons
+const buttons = document.querySelectorAll("button");
 
-// 🔁 Refresh the display
-function updateDisplay() {
-  display.textContent = current || '0';
-}
+let currentOps = "";
 
-// 🔢 Append digit to input
-function appendDigit(digit) {
-  if (digit === '0' && current === '0') return; // prevent leading zero spam
-  current += digit;
-  updateDisplay();
-}
+const updateDisplay = () => {
+  opsDisplay.textContent = currentOps || "0";
+};
 
-// ➕ Handle operation selection
-function setOperator(op) {
-  if (current === '') return;
-  if (previous !== '') evaluate();
-  operator = op;
-  previous = current;
-  current = '';
-}
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const val = btn.textContent;
 
-// ✅ Calculate result
-function evaluate() {
-  if (operator === null || current === '') return;
+    switch (val) {
+      case "AC":
+        currentOps = "";
+        ansDisplay.textContent = "0";
+        break;
 
-  const a = parseFloat(previous);
-  const b = parseFloat(current);
-  let result;
+      case "DEL":
+        currentOps = currentOps.slice(0, -1);
+        break;
 
-  switch (operator) {
-    case '+': result = a + b; break;
-    case '-': result = a - b; break;
-    case '*': result = a * b; break;
-    case '/': result = b !== 0 ? a / b : 'Err'; break;
-    case '%': result = a % b; break;
-    default: result = current;
-  }
+      case "=":
+        try {
+          const safeOps = currentOps
+            .replace(/x/g, "*")
+            .replace(/\^/g, "**");
+          const result = eval(safeOps);
+          ansDisplay.textContent = result;
+        } catch {
+          ansDisplay.textContent = "Error";
+        }
+        break;
 
-  current = result.toString();
-  previous = '';
-  operator = null;
-  updateDisplay();
-}
+      default:
+        currentOps += val;
+        break;
+    }
 
-// 🧹 Clear all
-function clearAll() {
-  current = '';
-  previous = '';
-  operator = null;
-  updateDisplay();
-}
-
-// 🎯 Button listeners
-document.querySelectorAll('.btn').forEach(btn => {
-  const val = btn.textContent;
-
-  if (!isNaN(val)) {
-    btn.addEventListener('click', () => appendDigit(val));
-  } else if (val === '=') {
-    btn.addEventListener('click', evaluate);
-  } else if (val === 'AC') {
-    btn.addEventListener('click', clearAll);
-  }
+    updateDisplay();
+  });
 });
-
-document.querySelectorAll('.operations button').forEach(opBtn => {
-  opBtn.addEventListener('click', () => setOperator(opBtn.textContent));
-});
-
-updateDisplay();
