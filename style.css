@@ -111,9 +111,16 @@ button:hover {
 }
 
 footer {
-  font-size: 1rem;
   text-align: center;
   color: var(--bg-light);
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 1.2rem 1rem 0.3rem 1rem;
   background-color: var(--bg-dark);
+  position: sticky;
+  z-index: 1000;
+  bottom: 0;
+}
+
+footer h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
 }
